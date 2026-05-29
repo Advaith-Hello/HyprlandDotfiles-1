@@ -1,0 +1,10 @@
+# Ignore all files and directories
+/*
+
+# Main files
+!.gitignore
+
+# Main folders
+!hypr*
+!kitty
+!wofi

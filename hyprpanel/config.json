@@ -1,0 +1,86 @@
+{
+  "bar.customModules.storage.paths": [
+    "/"
+  ],
+  "menus.volume.raiseMaximumVolume": true,
+  "bar.customModules.cpuTemp.unit": "metric",
+  "bar.customModules.cpu.round": false,
+  "bar.customModules.ram.round": false,
+  "bar.customModules.ram.labelType": "percentage",
+  "terminal": "kitty",
+  "theme.bar.floating": true,
+  "theme.bar.buttons.enableBorders": true,
+  "theme.bar.buttons.borderSize": "0.05em",
+  "theme.bar.border.width": "0.10em",
+  "theme.bar.enableShadow": false,
+  "bar.battery.hideLabelWhenFull": true,
+  "theme.bar.buttons.battery.enableBorder": false,
+  "bar.clock.showTime": true,
+  "bar.clock.showIcon": true,
+  "menus.clock.weather.location": "Plano,US",
+  "menus.clock.weather.unit": "imperial",
+  "menus.clock.weather.key": "dcbcc03cd536381853b932503b3b9148",
+  "theme.bar.border.location": "top",
+  "bar.layouts": {
+    "0": {
+      "left": [
+        "dashboard",
+        "workspaces",
+        "windowtitle"
+      ],
+      "middle": [
+        "media"
+      ],
+      "right": [
+        "volume",
+        "network",
+        "bluetooth",
+        "battery",
+        "systray",
+        "clock",
+        "notifications"
+      ]
+    },
+    "1": {
+      "left": [
+        "dashboard",
+        "workspaces",
+        "windowtitle"
+      ],
+      "middle": [
+        "media"
+      ],
+      "right": [
+        "volume",
+        "network",
+        "bluetooth",
+        "battery",
+        "systray",
+        "clock",
+        "notifications"
+      ]
+    },
+    "2": {
+      "left": [
+        "dashboard",
+        "workspaces",
+        "windowtitle"
+      ],
+      "middle": [
+        "media"
+      ],
+      "right": [
+        "volume",
+        "network",
+        "bluetooth",
+        "battery",
+        "systray",
+        "clock",
+        "notifications"
+      ]
+    }
+  },
+  "theme.bar.menus.menu.power.scaling": 100,
+  "tear": false,
+  "theme.bar.transparent": true
+}

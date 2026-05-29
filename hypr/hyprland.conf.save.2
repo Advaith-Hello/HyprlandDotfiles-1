@@ -1,0 +1,122 @@
+## Hyprland main config
+
+# Main configs
+$mainMod = SUPER
+$wsKey = ALT
+$terminal = kitty
+$fileManager = dolphin
+$menu = hyprlauncher
+
+# Changing renderer cus I cant get it to work otherwise
+env = WLR_RENDERER, vulkan
+
+# Startup
+exec-once = hyprlock
+exec-once = hyprpaper
+exec-once = dunst
+exec-once = pipewire
+exec-once = hyprpanel
+exec-once = lxqt-policykit-agent
+
+# Dark mode
+exec = gsettings set org.gnome.desktop.interface gtk-theme "YOUR_DARK_GTK3_THEME" # for GTK3 apps
+exec = gsettings set org.gnome.desktop.interface color-scheme "prefer-dark" # for GTK4 apps
+env = QT_QPA_PLATFORMTHEME,qt6ct # for Qt apps
+
+# Sound setup
+exec-once = dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=Hyprland
+exec-once = systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+exec-once = systemctl --user enable --now pipewire wireplumber pipewire-pulse
+
+# Misc binds 1
+bind = $mainMod, SPACE, exec, wofi --show drun
+bind = $mainMod, S, exec, hyprshot -m region --clipboard-only
+bind = $mainMod, F, exec, firefox
+bind = $mainMod, L, exec, hyprlock
+bind = $mainMod, D, exec, discord
+bind = $mainMod SHIFT, Q, forcekillactive
+
+# Terminal binds
+bind = $mainMod, R, exec, $terminal -e nano /home/main/.config/hypr/hyprland.conf
+bind = $mainMod, B, exec, $terminal -e btop 
+
+# Monitor setup
+monitor = HDMI-A-1, 1920x1080@74.97Hz, 0x0, 1.0
+monitor = eDP-1, 1920x1080@60.00Hz, 1920x0, 1.0
+
+# Misc binds 2
+bind = $mainMod, A, exec, $terminal
+bind = $mainMod, X, killactive,
+bind = $mainMod, M, exec, command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch exit
+bind = $mainMod, E, exec, $fileManager
+bind = $mainMod, V, togglefloating
+
+# Volume and Mute
+bind = , XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+ -l 1.0
+bind = , XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
+bind = , XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+bind = , XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle
+
+# Brightness control
+bind = , XF86MonBrightnessUp, exec, brightnessctl set +10%
+bind = , XF86MonBrightnessDown, exec, brightnessctl set 10%-
+
+# Screen lock
+bindl = , switch:on:Lid Switch, exec, hyprctl dispatch dpms off
+bindl = , switch:on:Lid Switch, exec, hyprlock
+bindl = , switch:off:Lid Switch, exec, hyprctl dispatch dpms on
+
+# Switch workspaces
+bind = $wsKey, 1, workspace, 1
+bind = $wsKey, 2, workspace, 2
+bind = $wsKey, 3, workspace, 3
+bind = $wsKey, 4, workspace, 4
+bind = $wsKey, 5, workspace, 5
+bind = $wsKey, 6, workspace, 6
+bind = $wsKey, 7, workspace, 7
+bind = $wsKey, 8, workspace, 8
+bind = $wsKey, 9, workspace, 9
+
+# Move window to workspace
+bind = $wsKey SHIFT, 1, movetoworkspace, 1
+bind = $wsKey SHIFT, 2, movetoworkspace, 2
+bind = $wsKey SHIFT, 3, movetoworkspace, 3
+bind = $wsKey SHIFT, 4, movetoworkspace, 4
+bind = $wsKey SHIFT, 5, movetoworkspace, 5
+bind = $wsKey SHIFT, 6, movetoworkspace, 6
+bind = $wsKey SHIFT, 7, movetoworkspace, 7
+bind = $wsKey SHIFT, 8, movetoworkspace, 8
+bind = $wsKey SHIFT, 9, movetoworkspace, 9
+
+# Workspace switching
+bind = $wsKey, Tab, workspace, previous
+bind = $wsKey SHIFT, RIGHT, movecurrentworkspacetomonitor, +1
+bind = $wsKey SHIFT, LEFT, movecurrentworkspacetomonitor, -1
+
+# Special workspace
+bind = $wsKey, grave, togglespecialworkspace, $terminal
+bind = $wsKey SHIFT, grave, movetoworkspace, special
+
+# Move and resize window
+bindm = $mainMod, mouse:272, movewindow
+bindm = $mainMod, mouse:273, resizewindow
+
+# Scroll mode binds (O)
+bind = $mainMod, left, layoutmsg, focus l
+bind = $mainMod, right, layoutmsg, focus r
+bind = $mainMod, up, layoutmsg, focus u
+bind = $mainMod, down, layoutmsg, focus d
+bind = $mainMod SHIFT, left, layoutmsg, movewindow l
+bind = $mainMod SHIFT, right, layoutmsg, movewindow r
+bind = $mainMod SHIFT, up, layoutmsg, movewindow u
+bind = $mainMod SHIFT, down, layoutmsg, movewindow d
+bind = $mainMod, P, layoutmsg, pin
+
+# Layer rules
+layerrule = blur on, match:namespace bar-0
+layerrule = blur on, match:namespace bar-1
+
+# Window rules
+windowrule = opacity 0.7 override 0.7 override, match:class ^(kitty)$
+windowrule = match:class ^(kitty)$
+windowrule = workspace 1 noinitialfocus, match:class ^(discord)$
